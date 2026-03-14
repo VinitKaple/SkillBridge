@@ -1,50 +1,103 @@
-import React, { useEffect, useState } from 'react';
-import { Eye, X, Briefcase, Target, Percent, Users, ListChecks } from 'lucide-react';
+import Stats from '../components/Stats';
+import { useState, useEffect, useMemo } from 'react';
+import { Send, X, UserPlus, Info } from 'lucide-react';
 
-const Companies = () => {
+
+const TNPCompanies = () => {
   const [companies, setCompanies] = useState([]);
-  const [selectedCompany, setSelectedCompany] = useState(null);
-  const [showPopup, setShowPopup] = useState(false);
   const [loading, setLoading] = useState(true);
-
-  // Fetch companies from API
- useEffect(() => {
-  const fetchCompanies = async () => {
-    try {
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/companies`);
-      const data = await res.json();
-      setCompanies(data);
-    } catch (error) {
-      console.error('Failed to fetch companies:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  fetchCompanies();
-}, []);
-
-  // Pagination state (you can reuse the logic from your existing code)
+  const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 5;
-  const indexOfLastRow = currentPage * rowsPerPage;
-  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentRows = companies.slice(indexOfFirstRow, indexOfLastRow);
-  const totalPages = Math.ceil(companies.length / rowsPerPage);
+  const [totalPages, setTotalPages] = useState(1);
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedCompany, setSelectedCompany] = useState(null);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+  const itemsPerPage = 10;
 
-  const goToPage = (page) => {
-    if (page >= 1 && page <= totalPages) setCurrentPage(page);
-  };
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`/api/tnpdata?page=${currentPage}&limit=${itemsPerPage}`);
+        if (!res.ok) throw new Error('Failed to fetch');
+        const data = await res.json();
+        setCompanies(data.companies);
+        setTotalPages(data.totalPages);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCompanies();
+  }, [currentPage]);
+
+  const sortedCompanies = useMemo(() => {
+    if (!sortConfig.key) return companies;
+    return [...companies].sort((a, b) => {
+      let aVal = a[sortConfig.key];
+      let bVal = b[sortConfig.key];
+      if (sortConfig.key === 'toughnessPercentage' || sortConfig.key === 'averagePackage') {
+        aVal = Number(aVal);
+        bVal = Number(bVal);
+      }
+      if (aVal < bVal) return sortConfig.direction === 'asc' ? -1 : 1;
+      if (aVal > bVal) return sortConfig.direction === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }, [companies, sortConfig]);
 
   const openPopup = (company) => {
     setSelectedCompany(company);
     setShowPopup(true);
   };
 
-  if (loading) return <div className="p-4">Loading companies...</div>;
+  const closePopup = () => {
+    setShowPopup(false);
+    setSelectedCompany(null);
+  };
+
+  const goToPage = (page) => {
+    if (page >= 1 && page <= totalPages) setCurrentPage(page);
+  };
+
+  const handleSortChange = (e) => {
+    const value = e.target.value;
+    if (value === 'none') {
+      setSortConfig({ key: null, direction: 'asc' });
+    } else {
+      const [key, direction] = value.split('-');
+      setSortConfig({ key, direction });
+    }
+  };
+
+  if (loading) return <div className="text-center py-10">Loading companies...</div>;
+  if (error) return <div className="text-center py-10 text-red-600">Error: {error}</div>;
 
   return (
     <div className="p-4 sm:p-6">
-      <h1 className="text-2xl font-bold mb-6">Companies</h1>
+ <div className="p-1 mb-4">
+
+      
+      <Stats />
+    </div>
+      {/* Sorting Dropdown */}
+      <div className="mb-4 flex justify-end">
+        
+        <select
+          value={sortConfig.key ? `${sortConfig.key}-${sortConfig.direction}` : 'none'}
+          onChange={handleSortChange}
+          className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        >
+          <option value="none">Sort By</option>
+          <option value="toughnessPercentage-desc">Toughness (High to Low)</option>
+          <option value="toughnessPercentage-asc">Toughness (Low to High)</option>
+          <option value="averagePackage-desc">Avg Package (High to Low)</option>
+          <option value="averagePackage-asc">Avg Package (Low to High)</option>
+          <option value="type-asc">Type (A-Z)</option>
+          <option value="type-desc">Type (Z-A)</option>
+        </select>
+      </div>
 
       {/* Companies Table */}
       <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -67,17 +120,17 @@ const Companies = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {currentRows.length > 0 ? (
-                currentRows.map((company) => (
+              {sortedCompanies.length > 0 ? (
+                sortedCompanies.map((company) => (
                   <tr key={company._id} className="hover:bg-gray-50">
-                    {/* Clickable company name */}
                     <td
                       className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-600 cursor-pointer hover:underline focus:outline-none"
                       onClick={() => openPopup(company)}
+                      onKeyDown={(e) => e.key === 'Enter' && openPopup(company)}
                       tabIndex={0}
                       role="button"
                     >
-                      {company.name}
+                      {company.companyName}
                     </td>
                     <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-700">
                       {company.type}
@@ -88,9 +141,8 @@ const Companies = () => {
                     <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
                       <button
                         onClick={() => openPopup(company)}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white text-xs font-medium rounded-lg hover:bg-blue-700 transition"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-indigo-600 text-white text-xs font-medium rounded-lg hover:bg-indigo-700 transition"
                       >
-                        <Eye size={14} />
                         View More
                       </button>
                     </td>
@@ -107,91 +159,134 @@ const Companies = () => {
           </table>
         </div>
 
-        {/* Pagination (reuse your existing pagination component) */}
+        {/* Pagination */}
         <div className="bg-white px-4 py-3 flex flex-col sm:flex-row items-center justify-between border-t border-gray-200 gap-4">
-          {/* ... your pagination code here ... */}
+          <div className="text-sm text-gray-700 order-2 sm:order-1">
+            Showing {(currentPage - 1) * itemsPerPage + 1} to {Math.min(currentPage * itemsPerPage, companies.length)} of {companies.length} results
+          </div>
+          <div className="flex items-center gap-2 order-1 sm:order-2">
+            <button
+              onClick={() => goToPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-3 py-1 border rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+            >
+              Previous
+            </button>
+            <div className="flex items-center gap-1">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => goToPage(page)}
+                  className={`px-2 sm:px-3 py-1 border rounded-md text-sm ${
+                    currentPage === page
+                      ? 'bg-indigo-600 text-white border-indigo-600'
+                      : 'hover:bg-gray-50'
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={() => goToPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="px-3 py-1 border rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Company Details Popup */}
       {showPopup && selectedCompany && (
         <div className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl relative pointer-events-auto max-h-[90vh] overflow-y-auto">
-            <div className="border-b border-gray-200 px-4 sm:px-6 py-4 flex items-center justify-between sticky top-0 bg-white">
+          <div className="bg-white rounded-xl shadow-xl w-full max-w-md sm:max-w-lg relative pointer-events-auto">
+            <div className="border-b border-gray-200 px-4 sm:px-6 py-4 flex items-center justify-between">
               <h3 className="text-base sm:text-lg font-semibold text-gray-800 flex items-center gap-2">
-                <Briefcase size={20} className="text-indigo-500" />
-                {selectedCompany.name}
+                <UserPlus size={20} className="text-indigo-500" />
+                Company Details
               </h3>
               <button
                 className="text-gray-400 hover:text-gray-600 transition"
-                onClick={() => setShowPopup(false)}
+                onClick={closePopup}
               >
                 <X size={20} />
               </button>
             </div>
 
-            <div className="p-4 sm:p-6 space-y-4">
-              {/* Key Info Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="bg-gray-50 p-3 rounded-lg">
-                  <div className="text-xs text-gray-500 uppercase">Type</div>
-                  <div className="font-medium">{selectedCompany.type}</div>
+            <div className="p-4 sm:p-6 max-h-[70vh] overflow-y-auto">
+              <p className="text-lg sm:text-xl font-bold text-gray-800 mb-2">
+                {selectedCompany.companyName}
+              </p>
+              <div className="space-y-4">
+                {/* Basic Info */}
+                <div className="grid grid-cols-2 gap-2 text-sm">
+                  <div className="font-medium text-gray-600">Type:</div>
+                  <div className="text-gray-800">{selectedCompany.type}</div>
+                  <div className="font-medium text-gray-600">Avg Package:</div>
+                  <div className="text-gray-800">{selectedCompany.averagePackage} LPA</div>
+                  <div className="font-medium text-gray-600">Toughness:</div>
+                  <div className="text-gray-800">{selectedCompany.toughnessPercentage}%</div>
                 </div>
-                <div className="bg-gray-50 p-3 rounded-lg">
-                  <div className="text-xs text-gray-500 uppercase">Average Package</div>
-                  <div className="font-medium">₹{selectedCompany.averagePackage} LPA</div>
-                </div>
-                <div className="bg-gray-50 p-3 rounded-lg">
-                  <div className="text-xs text-gray-500 uppercase">Toughness</div>
-                  <div className="font-medium">{selectedCompany.toughnessPercentage}%</div>
-                </div>
-                <div className="bg-gray-50 p-3 rounded-lg">
-                  <div className="text-xs text-gray-500 uppercase">Departments Targeted</div>
-                  <div className="font-medium">
-                    {selectedCompany.departmentsTargeted?.join(', ')}
+
+                {/* Departments Targeted */}
+                <div>
+                  <h4 className="font-medium text-gray-700 mb-1">Departments Targeted</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedCompany.departmentsTargeted.map((dept, idx) => (
+                      <span key={idx} className="px-2 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs">
+                        {dept}
+                      </span>
+                    ))}
                   </div>
                 </div>
-                <div className="bg-gray-50 p-3 rounded-lg sm:col-span-2">
-                  <div className="text-xs text-gray-500 uppercase">Roles Mostly Offered</div>
-                  <div className="font-medium">
-                    {selectedCompany.rolesMostlyOffered?.join(', ')}
+
+                {/* Roles Offered */}
+                <div>
+                  <h4 className="font-medium text-gray-700 mb-1">Roles Offered</h4>
+                  <ul className="list-disc list-inside text-sm text-gray-700">
+                    {selectedCompany.rolesOffered.map((role, idx) => (
+                      <li key={idx}>{role}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Hiring Process (as flowchart steps) */}
+                <div>
+                  <h4 className="font-medium text-gray-700 mb-2">Hiring Process</h4>
+                  <div className="space-y-3">
+                    {selectedCompany.hiringProcess
+                      .sort((a, b) => a.order - b.order)
+                      .map((round, idx) => (
+                        <div key={idx} className="flex items-start gap-3">
+                          <div className="flex-shrink-0 w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xs font-bold">
+                            {round.order}
+                          </div>
+                          <div>
+                            <p className="font-medium text-gray-800">{round.roundName}</p>
+                            {round.description && (
+                              <p className="text-xs text-gray-500">{round.description}</p>
+                            )}
+                          </div>
+                        </div>
+                      ))}
                   </div>
                 </div>
               </div>
 
-              {/* Hiring Process as Flowchart */}
-              <div>
-                <h4 className="text-md font-semibold mb-2 flex items-center gap-2">
-                  <ListChecks size={18} className="text-indigo-500" />
-                  Hiring Process
-                </h4>
-                <div className="flex flex-wrap items-center justify-start gap-2">
-                  {selectedCompany.hiringProcess?.map((round, idx) => (
-                    <React.Fragment key={idx}>
-                      <div className="bg-indigo-50 border border-indigo-200 rounded-lg px-4 py-2 text-sm font-medium text-indigo-700">
-                        {round.name}
-                        {round.description && (
-                          <span className="block text-xs text-gray-600 font-normal">
-                            {round.description}
-                          </span>
-                        )}
-                      </div>
-                      {idx < selectedCompany.hiringProcess.length - 1 && (
-                        <div className="text-gray-400 text-xl">→</div>
-                      )}
-                    </React.Fragment>
-                  ))}
-                </div>
-                {(!selectedCompany.hiringProcess || selectedCompany.hiringProcess.length === 0) && (
-                  <p className="text-sm text-gray-500">No hiring process details available.</p>
-                )}
+              <div className="mt-6 pt-3 border-t border-gray-200">
+                <p className="text-xs text-gray-500 flex items-center gap-1">
+                  <Info size={12} />
+                  Data provided by Training & Placement Cell
+                </p>
               </div>
             </div>
 
-            <div className="border-t border-gray-200 px-4 sm:px-6 py-4 flex justify-end">
+            <div className="px-4 sm:px-6 py-4 border-t border-gray-200 flex justify-end">
               <button
-                className="px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50 transition"
-                onClick={() => setShowPopup(false)}
+                className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm hover:bg-indigo-700 transition"
+                onClick={closePopup}
               >
                 Close
               </button>
@@ -203,4 +298,4 @@ const Companies = () => {
   );
 };
 
-export default Companies;
+export default TNPCompanies;

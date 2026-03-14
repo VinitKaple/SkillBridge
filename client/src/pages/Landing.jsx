@@ -9,6 +9,7 @@ const Landing = () => {
     <div>
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pt-[90px]">
         <Navbar />
+        <Hero/>
         <Features />
         <Footer />
       </div>
