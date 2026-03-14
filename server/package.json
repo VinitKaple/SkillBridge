@@ -4,13 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
-=======
-    "start": "node server.js",
-    "server": "nodemon server.js"
-  },
-   "scripts": {
->>>>>>> a5d755f58ec9157906922eafad46c0e5a341e5c2
     "start": "node server.js",
     "server": "nodemon server.js"
   },
@@ -36,10 +29,6 @@
     "nodemon": "^3.1.14",
     "openai": "^6.29.0",
     "pdf-parse": "^2.4.5",
-<<<<<<< HEAD
-=======
-    "pdf2json": "^4.0.2",
->>>>>>> a5d755f58ec9157906922eafad46c0e5a341e5c2
     "pdfjs-dist": "^5.5.207",
     "puppeteer": "^24.39.1",
     "twilio": "^5.13.0"
