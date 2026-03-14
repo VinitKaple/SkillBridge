@@ -3,9 +3,9 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
-import companyRoutes from "./routes/companyRoutes.js"
+import companyRoute from "./routes/companyRoutes.js"
 import resumeRoutes from "./routes/resumeRoutes.js"
-
+import companyRoutes from './routes/company.routes.js';
 
 
 
@@ -25,8 +25,9 @@ app.get("/", (req, res) => {
 });
 
 
-app.use("/api/company",companyRoutes)
+app.use("/api/company",companyRoute)
 app.use("/api",resumeRoutes)
+app.use('/api/companies', companyRoutes);
 
 // Register route
 

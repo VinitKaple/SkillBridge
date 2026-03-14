@@ -24,8 +24,8 @@ export const productBasedSkills = [
 "react",
 "node",
 "mongodb",
-"docker",
-"kubernetes",
+"Communication ",
+"Hackathon Winner. ",
 "aws",
 "microservices",
 "typescript"
