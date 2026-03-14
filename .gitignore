@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Environment files
 .env
 .env.local
@@ -14,10 +15,32 @@ build/
 logs
 *.log
 npm-debug.log*
+=======
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+server/.env
+client/.env
+
+# Logs
+*.log
+>>>>>>> fe230e75eecfe7c2930d9d3493c2824cf19d193f
 
 # OS files
 .DS_Store
 Thumbs.db
 
+<<<<<<< HEAD
 # Vercel
 .vercel
+=======
+# Build folders
+dist/
+build/
+.vercel/
+
+# IDE
+.vscode/
+>>>>>>> fe230e75eecfe7c2930d9d3493c2824cf19d193f
