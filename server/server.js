@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
+import companyRoutes from "./routes/companyRoutes.js"
+import resumeRoutes from "./routes/resumeRoutes.js"
 
 
 
@@ -21,6 +23,10 @@ await connectDB();
 app.get("/", (req, res) => {
   res.send("Server is running!");
 });
+
+
+app.use("/api/company",companyRoutes)
+app.use("/api",resumeRoutes)
 
 // Register route
 
