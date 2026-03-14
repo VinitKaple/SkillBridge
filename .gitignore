@@ -1,23 +1,22 @@
-# Environment files
-.env
-.env.local
-.env.*
-
-# Node modules
+# Dependencies
 node_modules/
 
-# Build folders
-dist/
-build/
+# Environment variables
+.env
+server/.env
+client/.env
 
 # Logs
-logs
 *.log
-npm-debug.log*
 
 # OS files
 .DS_Store
 Thumbs.db
 
-# Vercel
-.vercel
+# Build folders
+dist/
+build/
+.vercel/
+
+# IDE
+.vscode/
