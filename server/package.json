@@ -4,6 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
+=======
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+   "scripts": {
+>>>>>>> a5d755f58ec9157906922eafad46c0e5a341e5c2
     "start": "node server.js",
     "server": "nodemon server.js"
   },
@@ -20,6 +27,8 @@
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "form-data": "^4.0.5",
+    "fs-extra": "^11.3.4",
+    "handlebars": "^4.7.8",
     "mongoose": "^9.3.0",
     "multer": "^2.1.1",
     "node-fetch": "^3.3.2",
@@ -27,6 +36,10 @@
     "nodemon": "^3.1.14",
     "openai": "^6.29.0",
     "pdf-parse": "^2.4.5",
+<<<<<<< HEAD
+=======
+    "pdf2json": "^4.0.2",
+>>>>>>> a5d755f58ec9157906922eafad46c0e5a341e5c2
     "pdfjs-dist": "^5.5.207",
     "puppeteer": "^24.39.1",
     "twilio": "^5.13.0"

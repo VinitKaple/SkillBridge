@@ -7,16 +7,13 @@ import Hero from "../components/Hero";
 const Landing = () => {
   return (
     <div>
-
- <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pt-[90px]">
-      <Navbar />
-      <Hero />
-      <Features />
-      <Footer />
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pt-[90px]">
+        <Navbar />
+        <Features />
+        <Footer />
+      </div>
     </div>
+  );
+};
 
-    </div>
-  )
-}
-
-export default Landing
+export default Landing;

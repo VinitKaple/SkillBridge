@@ -1,3 +1,10 @@
+import dotenv from "dotenv";
+dotenv.config();
+import express from "express";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import { connectDB } from "./config/db.js";
+import resumeRoutes from "./routes/resumeRoutes.js";
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
@@ -17,6 +24,7 @@ const app = express();
 app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
 app.use(cors({ credentials: true, origin: true }));
+app.use("/api/resume", resumeRoutes);
 
 await connectDB();
 

@@ -24,6 +24,14 @@ const Navbar = () => {
             Subscription Plans
           </Link>
 
+           <Link to="/resume"
+           className="text-gray-700 hover:text-blue-600"
+           >
+            Resume
+           <svg xmlns="http://www.w3.org/2000/svg" className="si-glyph-cloud-rain-heavy-rain">
+            <use xlink:href="sprite.svg#si-glyph-cloud-rain-heavy-rain" />
+          </svg></Link>
+
           <a href="#features" className="text-gray-700 hover:text-blue-600">
             Features
           </a>

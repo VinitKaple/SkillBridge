@@ -1,5 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import NotFound from "./pages/NotFound";
+import Landing from "./pages/Landing";
+import ResumeDashboard from "./pages/ResumeDashboard";  // ← ADD
 
 import Landing from "./pages/Landing";
 import DashboardLayout from "./components/layout/DashboardLayout";
@@ -14,6 +17,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
+      <Route path="/resume" element={<ResumeDashboard />} />  {/* ← ADD */}
 
       <Route path="/dashboard" element={<DashboardLayout />}>
         <Route index element={<DashboardPage />} />
@@ -29,7 +33,6 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
       </Route>
 
-      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

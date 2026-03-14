@@ -18,6 +18,10 @@
     "lucide-react": "^0.577.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+<<<<<<< HEAD
+    "react-dropzone": "^15.0.0",
+=======
+>>>>>>> fe230e75eecfe7c2930d9d3493c2824cf19d193f
     "react-hot-toast": "^2.6.0",
     "react-leaflet": "^5.0.0",
     "react-router-dom": "^7.13.1",
