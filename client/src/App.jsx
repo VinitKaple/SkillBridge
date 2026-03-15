@@ -8,8 +8,8 @@ import DashboardPage from "./pages/DashboardPage";
 import ResumeAnalysis from "./pages/ResumeAnalysis";
 import ResumeBuilder from "./pages/ResumeBuilder";
 import SettingsPage from "./pages/SettingsPage";
-import Preparation from "./pages/Preparation";
 import Admin from "./pages/Admin";
+import MockInterview from "./pages/MockInterview";
 
 const App = () => {
   return (
@@ -24,8 +24,9 @@ const App = () => {
         <Route path="build" element={<ResumeBuilder />} />
 
         <Route path="settings" element={<SettingsPage />} />
-        <Route path="prepare" element={<Preparation />} />
-          <Route path="admin" element={<Admin />} />
+  
+        <Route path="admin" element={<Admin />} />
+        <Route path="prepare" element={<MockInterview />} />
 
         {/* Catches broken links INSIDE dashboard (e.g. /dashboard/test) */}
         <Route path="*" element={<NotFound />} />
