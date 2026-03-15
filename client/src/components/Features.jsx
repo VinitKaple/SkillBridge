@@ -5,8 +5,9 @@ import {
   Users,
   Brain,
   Package,
-  Mail,
-  ShieldCheck
+  Database,
+  FileText,
+  Edit3
 } from "lucide-react";
 
 const iconMap = {
@@ -14,8 +15,9 @@ const iconMap = {
   Users,
   Brain,
   Package,
-  Mail,
-  ShieldCheck
+  Database,
+  FileText,
+  Edit3
 };
 
 const Features = () => {

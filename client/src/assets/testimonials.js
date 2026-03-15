@@ -9,14 +9,14 @@ export const testimonialsData = [
   },  {
     name: "Tushar Verma",
     role: "Full-Stack Developer",
-    image: "./b.jpg",
+    image: "./c.jpg",
     quote:
       " It transforms my job search. From coding tests to interview practice, it helped me confidently tackle both campus and off-campus opportunities.",
   },
   {
     name: "Anandi Rathi",
     role: "Data Analyst",
-    image: "./c.jpg",
+    image: "./b.jpg",
     quote:
       " I was able to clear interviews easily and land a great role in my dream company.",
   }

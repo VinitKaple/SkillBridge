@@ -1,44 +1,45 @@
 export const featuresData = [
+   {
+    iconName: "Brain",
+    title: "AI Recommendation Engine",
+    description:
+      "Analyzes student academic info and skillset to suggest company eligibility, generates confidence scores, and provides actionable resume improvement recommendations.",
+    route: "/ai-engine",
+  },
   {
     iconName: "LayoutDashboard",
-    title: "Executive Dashboard",
+    title: "Placement Dashboard",
     description:
-      "Get a complete overview of customer growth, total recommendations generated, cross-sell revenue, and AI performance through real-time analytics and smart visual insights.",
+      "Get a complete overview of companies visiting, students placed, boys-to-girls ratio, department-wise performance, and detailed hiring process for each company, all in one centralized dashboard.",
     route: "/dashboard",
   },
   {
     iconName: "Users",
-    title: "Customer Analytics",
+    title: "Guidance Chatbot",
     description:
-      "Manage and analyze customer profiles including income, risk profile, active products, recommendation confidence score, and engagement status in one intelligent CRM view.",
-    route: "/customers",
+      "AI-powered chatbot for answering student queries related to company criteria, placement rounds, and college-specific hiring processes.",
+    route: "/chatbot",
+  },
+ 
+  {
+    iconName: "FileText",
+    title: "Resume Builder & Analyzer",
+    description:
+      "Helps students create resumes tailored to company requirements, analyzes resumes for strengths and weaknesses, and matches skills with companies visiting campus.",
+    route: "/resume-builder",
   },
   {
-    iconName: "Brain",
-    title: "AI Recommendation Engine",
+    iconName: "Edit3",
+    title: "Mock Test & Preparation",
     description:
-      "Hybrid Rule-Based and ML-powered engine that maps customer behavior to the most relevant banking products with confidence score, explainability panel, and decision logs.",
-    route: "/ai-engine",
+      "AI-powered mock tests and preparation modules to help students practice aptitude, technical, and HR rounds before the actual placement process.",
+    route: "/mock-prep",
   },
   {
-    iconName: "Package",
-    title: "Bank Products",
+    iconName: "Database",
+    title: "Multi-College & Admin Control",
     description:
-      "Explore deposits, loans, credit cards, insurance, and investments with real-time metrics including active users, monthly growth, revenue contribution, and AI success rate.",
-    route: "/products",
-  },
-  {
-    iconName: "Mail",
-    title: "Campaigns & Messaging",
-    description:
-      "Create personalized campaigns, generate AI-powered messages, track open and conversion rates, and manage bulk or individual product recommendations.",
-    route: "/campaigns",
-  },
-  {
-    iconName: "ShieldCheck",
-    title: "Compliance & Logs",
-    description:
-      "Ensure regulatory readiness with audit trails, AI decision logs, customer consent status, encryption monitoring, and complete message tracking for transparency.",
-    route: "/compliance",
+      "Supports multi-college datasets, personalized admin controls, and subscription-based premium features including unlimited resume analysis and mock tests.",
+    route: "/admin",
   },
 ];
