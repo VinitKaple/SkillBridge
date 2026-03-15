@@ -18,7 +18,9 @@ const TNPCompanies = () => {
     const fetchCompanies = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/api/tnpdata?page=${currentPage}&limit=${itemsPerPage}`);
+       const res = await fetch(
+  `${import.meta.env.VITE_BACKEND_URL}/api/tnpdata?page=${currentPage}&limit=${itemsPerPage}`
+);
         if (!res.ok) throw new Error('Failed to fetch');
         const data = await res.json();
         setCompanies(data.companies);

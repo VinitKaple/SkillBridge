@@ -1,20 +1,23 @@
 import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard,
-  FileSearch, // For Resume Analysis
-  FilePlus,   // For Resume Builder
-  Settings,
-  Power,
-  GraduationCap
+  FileSearch,
+  FilePlus,
+  Target,           // for Mock Preparation
+  Mail,              // for Contact Us
+  Shield,            // for Admin Control
+  Power 
+,            // optional logout
 } from "lucide-react";
 
 const Sidebar = () => {
-  // Navigation items synced with your App.jsx routes
   const menuItems = [
     { name: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
     { name: "Resume Analysis", icon: FileSearch, path: "/dashboard/resume-engine" },
     { name: "Resume Builder", icon: FilePlus, path: "/dashboard/build" },
-    { name: "Settings", icon: Settings, path: "/dashboard/settings" },
+    { name: "Mock Preparation", icon: Target, path: "/dashboard/prepare" },
+    { name: "Admin Control", icon: Shield, path: "/dashboard/admin" },
+    { name: "Contact Us", icon: Mail, path: "/dashboard/settings" },
   ];
 
   return (
@@ -23,15 +26,17 @@ const Sidebar = () => {
       <div>
         <div className="mb-8 flex items-center gap-2">
           <div className="flex items-center justify-center">
-            <img 
-              src="/logo.png" 
-              alt="SkillBridge Logo" 
-              className="h-8 w-auto object-contain" 
+            <img
+              src="/logo.png"
+              alt="SkillBridge Logo"
+              className="h-8 w-auto object-contain"
             />
           </div>
           <div>
             <h1 className="text-xl font-bold text-gray-900">SkillBridge</h1>
-            <p className="text-xs text-blue-600 font-medium">Career Growth AI</p>
+            <p className="text-xs text-blue-600 font-medium">
+              Career Growth AI
+            </p>
           </div>
         </div>
 

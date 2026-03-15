@@ -19,13 +19,13 @@ const Topbar = ({ onMenuClick }) => {
         </button>
 
         {/* Back Button */}
-        <button
-          onClick={() => navigate("/")}
-          className="flex items-center gap-1 cursor-pointer text-gray-600 text-sm hover:text-blue-600 transition"
-        >
-          <ArrowLeft size={18} />
-          <span className="hidden sm:inline">Back</span>
-        </button>
+<button
+  onClick={() => window.location.href = "/"} // Forces a full browser refresh
+  className="flex items-center gap-1 cursor-pointer text-gray-600 text-sm hover:text-blue-600 transition"
+>
+  <ArrowLeft size={18} />
+  <span className="hidden sm:inline">Back</span>
+</button>
 
       </div>
 

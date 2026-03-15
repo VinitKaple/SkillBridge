@@ -6,7 +6,7 @@ import { connectDB } from "./config/db.js";
 import companyRoute from "./routes/companyRoutes.js"
 import resumeRoutes from "./routes/resumeRoutes.js"
 import tnpdataRoutes from './routes/tnpdata.routes.js';
-
+import buildResume from "./routes/buildResume.js";   // ← ADD
 
 
 
@@ -17,7 +17,6 @@ const app = express();
 app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
 app.use(cors({ credentials: true, origin: true }));
-app.use("/api/resume", resumeRoutes);
 
 await connectDB();
 
@@ -29,6 +28,7 @@ app.get("/", (req, res) => {
 app.use("/api/company",companyRoute)
 app.use("/api",resumeRoutes)
 app.use('/api/tnpdata', tnpdataRoutes);
+app.use("/api/resume", buildResume);    // ← ADD
 
 // Register route
 
