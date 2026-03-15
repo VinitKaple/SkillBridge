@@ -12,6 +12,7 @@
   "dependencies": {
     "@clerk/clerk-react": "^5.61.3",
     "@clerk/react": "^6.1.0",
+    "@heroicons/react": "^2.2.0",
     "@tailwindcss/vite": "^4.2.1",
     "axios": "^1.13.6",
     "framer-motion": "^12.36.0",
