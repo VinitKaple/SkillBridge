@@ -24,7 +24,7 @@ const Features = () => {
       <div className="container mx-auto px-4">
         
         <h2 className="text-3xl font-bold text-center mb-6">
-          Explore Our AI-Powered Banking Cross Sell Platform
+          Explore Our AI-Powered SkillBridge Platform
         </h2>
 
     
