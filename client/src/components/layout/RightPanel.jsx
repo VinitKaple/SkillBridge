@@ -1,106 +1,199 @@
-import { Send, Download, FileText, MoreHorizontal } from "lucide-react";
+import {
+  Calendar,
+  Briefcase,
+  GraduationCap,
+  Megaphone,
+  Clock,
+  ExternalLink,
+  Sparkles
+} from "lucide-react";
+import { useEffect, useRef } from "react";
 
 const RightPanel = () => {
+
+  const notices = [
+    {
+      id: 1,
+      type: "placement",
+      title: "Infosys Campus Placement Drive",
+      description: "Registration closes on March 25, 2026. Eligible branches: CSE, IT, ECE.",
+      date: "2026-03-20",
+      icon: Briefcase,
+      color: "text-blue-600",
+      bg: "bg-blue-50",
+      link: "#",
+      new: true,
+      priority: true
+    },
+    {
+      id: 2,
+      type: "workshop",
+      title: "Resume Building Workshop",
+      description: "Industry mentors will guide students on creating ATS-friendly resumes.",
+      date: "2026-03-22",
+      icon: GraduationCap,
+      color: "text-purple-600",
+      bg: "bg-purple-50",
+      link: "#",
+      new: true
+    },
+    {
+      id: 3,
+      type: "internship",
+      title: "Google Summer Internship 2026",
+      description: "Applications open for pre-final year students. Deadline: April 5.",
+      date: "2026-03-18",
+      icon: Calendar,
+      color: "text-green-600",
+      bg: "bg-green-50",
+      link: "#"
+    },
+    {
+      id: 4,
+      type: "announcement",
+      title: "Mock Interviews by TCS Alumni",
+      description: "Sign-up for mock interviews on March 28–29. Limited seats available.",
+      date: "2026-03-19",
+      icon: Megaphone,
+      color: "text-orange-600",
+      bg: "bg-orange-50",
+      link: "#"
+    },
+    {
+      id: 5,
+      type: "deadline",
+      title: "Microsoft Online Assessment",
+      description: "Technical screening test scheduled on March 30.",
+      date: "2026-03-21",
+      icon: Clock,
+      color: "text-red-600",
+      bg: "bg-red-50",
+      link: "#",
+      priority: true
+    },
+    {
+      id: 6,
+      type: "workshop",
+      title: "Aptitude Training Session",
+      description: "Weekend aptitude preparation program for placement season.",
+      date: "2026-03-24",
+      icon: GraduationCap,
+      color: "text-purple-600",
+      bg: "bg-purple-50",
+      link: "#"
+    },
+    {
+      id: 7,
+      type: "placement",
+      title: "Amazon Placement Drive",
+      description: "Online assessment scheduled for April 2. Prepare well.",
+      date: "2026-03-26",
+      icon: Briefcase,
+      color: "text-blue-600",
+      bg: "bg-blue-50",
+      link: "#"
+    },
+  ];
+
+  const scrollRef = useRef(null);
+
+  // Auto scroll effect
+  useEffect(() => {
+ 
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("en-IN", { day: "numeric", month: "short" });
+  };
+
   return (
-   <div className="w-80 h-full bg-white border-l p-6 flex flex-col gap-8 overflow-y-auto">
+    <div className="w-80 h-full bg-white border-l p-6 flex flex-col">
 
-      
-      {/* Wallet Section */}
-      <div>
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="font-semibold text-gray-700">Premium</h2>
-          <MoreHorizontal size={18} className="text-gray-400 cursor-pointer" />
+      {/* Header */}
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-2">
+          <Sparkles size={18} className="text-blue-600" />
+          <h2 className="text-lg font-bold text-gray-800">
+            TNP Announcements
+          </h2>
         </div>
 
-        {/* Card Image */}
-        <img
-          src="/card.png"   // 👈 your PNG name
-          alt="Bank Card"
-          className="rounded-xl shadow-md mb-4"
-        />
-
-        {/* Action Buttons */}
-        <div className="grid grid-cols-4 gap-4 text-center">
-          <div className="flex flex-col items-center gap-2 cursor-pointer hover:text-blue-600 transition">
-            <Send size={20} />
-            <span className="text-xs">Send report</span>
-          </div>
-
-          <div className="flex flex-col items-center gap-2 cursor-pointer hover:text-blue-600 transition">
-            <Download size={20} />
-            <span className="text-xs">Download report</span>
-          </div>
-
-          <div className="flex flex-col items-center gap-2 cursor-pointer hover:text-blue-600 transition">
-            <FileText size={20} />
-            <span className="text-xs">Print report</span>
-          </div>
-
-          <div className="flex flex-col items-center gap-2 cursor-pointer hover:text-blue-600 transition">
-            <MoreHorizontal size={20} />
-            <span className="text-xs">More</span>
-          </div>
-        </div>
+        <span className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
+          {notices.length}+ 
+        </span>
       </div>
 
-      {/* Customer Rating Section */}
-      <div className="bg-gray-50 rounded-xl p-6 shadow-sm">
-        
-        {/* Rating Circle */}
-        <div className="flex flex-col items-center mb-4">
-          <div className="w-16 h-16 flex items-center justify-center rounded-full bg-orange-400 text-white text-xl font-bold">
-            4.5
-          </div>
+      {/* Notice List */}
+      <div
+        ref={scrollRef}
+        className="flex flex-col gap-4 overflow-y-auto pr-1"
+      >
+        {notices.map((notice) => {
+          const Icon = notice.icon;
 
-          <div className="flex text-yellow-400 mt-2">
-            ⭐⭐⭐⭐⭐
-          </div>
-        </div>
+          return (
+            <div
+              key={notice.id}
+              className={`p-4 rounded-xl border transition-all hover:shadow-sm cursor-pointer
+              ${notice.priority ? "bg-blue-50 border-blue-200" : "border-gray-100"}`}
+            >
+              <div className="flex gap-3">
 
-        {/* Feedback Header */}
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="font-semibold text-gray-700">
-            Customer Feedback
-          </h3>
-          <span className="text-xs text-blue-600 cursor-pointer">
-            See All
-          </span>
-        </div>
+                {/* Icon */}
+                <div
+                  className={`w-10 h-10 rounded-lg ${notice.bg} flex items-center justify-center flex-shrink-0`}
+                >
+                  <Icon size={20} className={notice.color} />
+                </div>
 
-        {/* Feedback List */}
-        <div className="flex flex-col gap-4 text-sm">
-          
-          <div className="flex items-start gap-3">
-            <img
-              src="/male1.png"
-              alt="user"
-              className="w-8 h-8 rounded-full"
-            />
-            <div>
-              <p className="font-medium">Robert Smith</p>
-              <p className="text-gray-500 text-xs">
-                Excellent AI recommendations!
-              </p>
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+
+                  <div className="flex items-start justify-between gap-2">
+
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-sm font-semibold text-gray-800 line-clamp-1">
+                        {notice.title}
+                      </h3>
+
+                      {notice.new && (
+                        <span className="text-[10px] px-2 py-0.5 bg-green-500 text-white rounded-full">
+                          NEW
+                        </span>
+                      )}
+                    </div>
+
+                    <span className="text-xs text-gray-400 whitespace-nowrap">
+                      {formatDate(notice.date)}
+                    </span>
+
+                  </div>
+
+                  <p className="text-xs text-gray-500 mt-1 line-clamp-2">
+                    {notice.description}
+                  </p>
+
+                  <div className="mt-2 flex items-center gap-1 text-xs text-blue-600 hover:text-blue-700">
+                    <span>View details</span>
+                    <ExternalLink size={12} />
+                  </div>
+
+                </div>
+
+              </div>
             </div>
-          </div>
-
-          <div className="flex items-start gap-3">
-            <img
-              src="/female1.jpg"
-              alt="user"
-              className="w-8 h-8 rounded-full"
-            />
-            <div>
-              <p className="font-medium">Deni Lovar</p>
-              <p className="text-gray-500 text-xs">
-                Smooth cross-sell experience.
-              </p>
-            </div>
-          </div>
-
-
-        </div>
+          );
+        })}
       </div>
+
+      {/* Footer */}
+      <div className="text-xs text-gray-400 text-center pt-4 border-t mt-4">
+        Training & Placement Cell • Career Updates
+      </div>
+
     </div>
   );
 };

@@ -98,7 +98,7 @@ const Stats = () => {
       color: 'teal',
     },
     {
-      title: 'Average Package',
+      title: 'Highest Package',
       value: formatNumber(averagePackage),
       growth: 22,
       prefix: '₹',
