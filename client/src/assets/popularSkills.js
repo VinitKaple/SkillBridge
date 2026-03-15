@@ -1,33 +1,12 @@
-export const serviceBasedSkills = [
-
-"java",
-"python",
-"c",
-"c++",
-"javascript",
-"html",
-"css",
-"sql",
-"react",
-"node",
-"aws",
-"git",
-"linux"
-
-];
-
-export const productBasedSkills = [
-
-"data structures",
-"algorithms",
-"system design",
-"react",
-"node",
-"mongodb",
-"Communication ",
-"Hackathon Winner. ",
-"aws",
-"microservices",
-"typescript"
-
+export const importantResumeSkills = [
+"communication",
+"problem solving",
+"dsa",
+"aptitude",
+"logical reasoning",
+"analytical thinking",
+"leadership",
+"presentation skills",
+"hackathon participation or winner",
+"competitive programming",
 ];
