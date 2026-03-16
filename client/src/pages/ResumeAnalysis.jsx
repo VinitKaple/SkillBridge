@@ -1,6 +1,13 @@
+// pages/ResumeAnalyzer.jsx  –  complete updated file
+// Changes vs original:
+//   1. Imports ResumeReportDownload component
+//   2. Passes `result` and `form` to it
+//   3. Shows Download button at the top of the results section
+
 import { useState, useEffect } from "react";
 import { Upload, Loader2, CheckCircle, XCircle, AlertCircle } from "lucide-react";
-import { importantResumeSkills } from "../assets/popularSkills.js"; // adjust path as needed
+import { importantResumeSkills } from "../assets/popularSkills.js";
+import ResumeReportDownload from "../components/ResumeReportDownload.jsx";
 
 export default function ResumeAnalyzer() {
   const [form, setForm] = useState({
@@ -160,6 +167,12 @@ export default function ResumeAnalyzer() {
       {/* Results Section */}
       {result && (
         <div className="space-y-6">
+
+          {/* ── Download PDF button ─────────────────────────── */}
+          <div className="flex justify-end">
+            <ResumeReportDownload result={result} form={form} />
+          </div>
+
           {/* ATS Score & Skills */}
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
             <div className="flex items-center justify-between">
@@ -182,11 +195,11 @@ export default function ResumeAnalyzer() {
             </div>
           </div>
 
-              {/* Missing Important Skills Section (new) */}
+          {/* Missing Important Skills Section */}
           {missingImportantSkills.length > 0 && (
             <div className="bg-yellow-50 p-6 rounded-xl border border-yellow-200">
               <h3 className="font-semibold text-yellow-700 mb-2 flex items-center gap-2">
-                <AlertCircle size={18} />  Consider adding references of this  non technical skills to improve your resume:
+                <AlertCircle size={18} /> Consider adding references of these non-technical skills to improve your resume:
               </h3>
               <div className="flex flex-wrap gap-2">
                 {missingImportantSkills.map((skill, i) => (
@@ -283,7 +296,7 @@ export default function ResumeAnalyzer() {
                   })}
                 </div>
 
-                {/* Pagination Controls (exactly as requested) */}
+                {/* Pagination Controls */}
                 <div className="bg-white px-4 py-3 flex flex-col sm:flex-row items-center justify-between border-t border-gray-200 gap-4 mt-4">
                   <div className="text-sm text-gray-700 order-2 sm:order-1">
                     Showing {(currentPage - 1) * itemsPerPage + 1} to{" "}
@@ -327,7 +340,7 @@ export default function ResumeAnalyzer() {
             )}
           </div>
 
-          {/* AI Career Advice (unchanged) */}
+          {/* AI Career Advice */}
           <div className="bg-green-50 p-6 rounded-xl border border-green-200">
             <h3 className="font-semibold text-green-700 mb-2 flex items-center gap-2">
               <AlertCircle size={18} /> AI Career Advice
@@ -335,7 +348,6 @@ export default function ResumeAnalyzer() {
             <p className="text-gray-700 text-sm leading-relaxed">{result.aiAdvice}</p>
           </div>
 
-      
         </div>
       )}
     </div>
