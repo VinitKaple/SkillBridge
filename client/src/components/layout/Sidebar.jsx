@@ -68,18 +68,20 @@ const Sidebar = () => {
       </div>
 
       {/* Bottom Section */}
-      <div className="space-y-4">
-        <NavLink
-          to="/"
-          className="flex items-center gap-3 px-4 py-3 rounded-lg text-red-500 hover:bg-red-50 transition-all"
-        >
-          <Power size={18} />
-          <span>Log Out</span>
-        </NavLink>
-        <div className="border-t pt-4 text-xs text-gray-400 font-medium text-center">
-          © 2026 SKILLBRIDGE AI
-        </div>
-      </div>
+<button
+  onClick={() => {
+    // Clear any stored tokens/session data
+    localStorage.removeItem('token');   // adjust key names as needed
+    localStorage.removeItem('user');
+    // Optionally clear cookies, context, etc.
+    // Then force a full page reload to the home page (or login)
+    window.location.href = "/";         // or "/login"
+  }}
+  className="flex items-center gap-3 px-4 py-3 rounded-lg text-red-500 hover:bg-red-50 transition-all w-full text-left"
+>
+  <Power size={18} />
+  <span>Log Out</span>
+</button>
     </div>
   );
 };
