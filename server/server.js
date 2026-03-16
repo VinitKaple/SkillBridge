@@ -10,6 +10,7 @@ import buildResume from "./routes/buildResume.js";   // ← ADD
 import interviewRoutes from "./routes/interviewRoutes.js";
 import chatRoutes from "./routes/chatRoutes.js";   // ← ADD THIS
 import contactRoutes from "./routes/Contactroutes.js";
+import confidenceRoutes from "./routes/confidenceRoutes.js";
 
 
 dotenv.config();
@@ -34,6 +35,7 @@ app.use("/api/resume", buildResume);    // ← ADD
 app.use("/api/interview", interviewRoutes);
 app.use("/api/chat", chatRoutes);   // ← ADD THIS
 app.use("/api/contact", contactRoutes);
+app.use("/api/confidence", confidenceRoutes);
 
 // Register route
 

@@ -10,7 +10,7 @@ import ResumeBuilder from "./pages/ResumeBuilder";
 import SettingsPage from "./pages/SettingsPage";
 import Admin from "./pages/Admin";
 import MockInterview from "./pages/MockInterview";
-import CampusDrive from "./pages/CampusDrive";
+import ConfidenceLens from "./components/confidence/ConfidenceLens";
 import ChatBot from "./components/ChatBot";
 
 const App = () => {
@@ -28,7 +28,8 @@ const App = () => {
 
           <Route path="settings" element={<SettingsPage />} />
 
-          <Route path="off" element={<CampusDrive />} />
+        
+              <Route path="off" element={<ConfidenceLens />} />
 
           <Route path="admin" element={<Admin />} />
 

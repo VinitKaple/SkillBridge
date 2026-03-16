@@ -16,8 +16,9 @@ const Sidebar = () => {
     { name: "Resume Analysis", icon: FileSearch, path: "/dashboard/resume-engine" },
     { name: "Resume Builder", icon: FilePlus, path: "/dashboard/build" },
     { name: "Prepare with AI", icon: Target, path: "/dashboard/prepare" },
+          { name: "Confidence Lens", icon: Mail, path: "/dashboard/off" },
     { name: "Admin Controls", icon: Shield, path: "/dashboard/admin" },
-      { name: "Off-Campus Drive ", icon: Mail, path: "/dashboard/off" },
+
     { name: "Contact Us", icon: Mail, path: "/dashboard/settings" },
   ];
 
