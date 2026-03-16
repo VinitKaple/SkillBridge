@@ -1,14 +1,14 @@
 import { useState } from "react";
 
 const COMPANIES = [
-  { name: "Google", tier: "Tier 1", color: "blue", description: "Deep technical + system design" },
-  { name: "Microsoft", tier: "Tier 1", color: "blue", description: "Collaborative + growth mindset" },
-  { name: "Amazon", tier: "Tier 1", color: "blue", description: "Leadership principles focused" },
-  { name: "Razorpay", tier: "Tier 2", color: "indigo", description: "Payments + security focused" },
-  { name: "Swiggy", tier: "Tier 2", color: "indigo", description: "Real-world + ops scenarios" },
-  { name: "Flipkart", tier: "Tier 2", color: "indigo", description: "Product + scale focused" },
-  { name: "Infosys", tier: "Tier 3", color: "gray", description: "Core CS + aptitude based" },
-  { name: "TCS", tier: "Tier 3", color: "gray", description: "Fundamentals + communication" },
+  { name: "Google", tier: "Tier 1", color: "blue", description: "Algorithms + system design focused" },
+  { name: "Microsoft", tier: "Tier 1", color: "blue", description: "Structured interviews + collaboration" },
+  { name: "Amazon", tier: "Tier 1", color: "blue", description: "Leadership principles + problem solving" },
+  { name: "Adobe", tier: "Tier 1", color: "blue", description: "Product engineering + coding depth" },
+  { name: "Goldman Sachs", tier: "Tier 1", color: "blue", description: "Finance tech + strong algorithms" },
+  { name: "Oracle", tier: "Tier 2", color: "indigo", description: "Databases + backend systems" },
+  { name: "Paytm", tier: "Tier 2", color: "indigo", description: "Payments systems + APIs" },
+  { name: "IBM", tier: "Tier 2", color: "indigo", description: "Enterprise software + architecture" },
 ];
 
 const ROUNDS = [
@@ -81,8 +81,12 @@ export default function InterviewSetup({ onStart }) {
             </svg>
           </div>
           <div>
-            <h1 className="text-lg font-semibold text-gray-900">AI Mock Interview</h1>
-            <p className="text-xs text-gray-500">Personalized by your resume + company data</p>
+<h1 className="text-lg font-semibold text-gray-900">
+  Campus Placement AI Interview
+</h1>
+<p className="text-xs text-gray-500">
+  Voice mock interviews based on companies visiting your campus
+</p>
           </div>
         </div>
       </div>

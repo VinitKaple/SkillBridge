@@ -7,14 +7,14 @@ function getOpenAI() {
 }
 
 const COMPANY_PERSONAS = {
-  Google: "methodical, asks follow-ups, focuses on fundamentals and scalability",
-  Razorpay: "direct, payments-focused, security-aware, asks about real scenarios",
-  Swiggy: "casual but technical, ops-minded, asks about real-world failures",
-  Microsoft: "structured, collaborative, growth mindset focused",
-  Amazon: "leadership principles focused, STAR method expected",
-  Flipkart: "product-minded, scale-focused, india-context problems",
-  Infosys: "structured, core CS focused, communication matters",
-  TCS: "friendly, fundamentals focused, aptitude based",
+  Google: "methodical, analytical, asks deep follow-ups on fundamentals and scalability",
+  Microsoft: "structured, collaborative, focuses on clear thinking and communication",
+  Amazon: "leadership principles focused, expects STAR structured answers",
+  Adobe: "product engineering focused, practical coding discussions",
+  "Goldman Sachs": "finance-tech focused, analytical and detail oriented",
+  Oracle: "database and distributed systems focused, strong backend discussions",
+  Paytm: "payments systems focused, APIs and real-world product thinking",
+  IBM: "enterprise engineering focused, fundamentals and architecture discussions",
 };
 
 const DEFAULT_PERSONA = "professional, balanced, curious about your thinking";
@@ -187,16 +187,16 @@ Return ONLY valid JSON with this exact structure, no markdown, no explanation:
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function getTone(company) {
-  const tones = {
-    Google: "analytical",
-    Razorpay: "direct",
-    Swiggy: "casual",
-    Microsoft: "structured",
-    Amazon: "formal",
-    Flipkart: "product-focused",
-    Infosys: "structured",
-    TCS: "friendly",
-  };
+const tones = {
+  Google: "analytical",
+  Microsoft: "structured",
+  Amazon: "formal",
+  Adobe: "product-focused",
+  "Goldman Sachs": "analytical",
+  Oracle: "technical",
+  Paytm: "practical",
+  IBM: "professional",
+};
   return tones[company] || "professional";
 }
 

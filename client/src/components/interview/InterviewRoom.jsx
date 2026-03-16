@@ -2,52 +2,55 @@ import { useState, useEffect, useRef, useCallback } from "react";
 
 const QUESTION_BANK = {
   "core-cs": [
-    "Tell me about yourself and your technical background.",
-    "Explain the difference between a process and a thread.",
-    "What is a deadlock? How can you prevent it?",
-    "Explain ACID properties in databases.",
-    "What is normalization? Explain up to 3NF.",
-    "What is the difference between TCP and UDP?",
-    "Explain the four pillars of Object Oriented Programming.",
-    "What is virtual memory and how does it work?",
-    "Explain indexing in DBMS and why it is important.",
-    "What is the OSI model? Name all 7 layers.",
+    "Hello! Nice to meet you. Could you briefly introduce yourself and tell me about your technical background?",
+    "Great. Now, can you explain the difference between a process and a thread?",
+    "What is a deadlock in operating systems, and how can it be prevented?",
+    "Could you explain the ACID properties used in databases?",
+    "What is database normalization? Can you briefly explain up to third normal form?",
+    "Can you tell me the difference between TCP and UDP?",
+    "What are the four main pillars of Object-Oriented Programming?",
+    "Could you explain what virtual memory is and why it is used?",
+    "What is indexing in databases, and why is it important?",
+    "Finally, can you name the seven layers of the OSI model?",
   ],
+
   dsa: [
-    "Tell me about yourself and your problem solving approach.",
-    "Explain the time complexity of binary search.",
-    "How does merge sort work? What is its space complexity?",
-    "What is a hash table? How are collisions handled?",
-    "Explain the difference between BFS and DFS.",
-    "What is dynamic programming? Give a real example.",
-    "Explain the two pointer technique with an example.",
+    "Hello! Before we start, could you briefly introduce yourself and your approach to problem solving?",
+    "Alright. Can you explain the time complexity of binary search?",
+    "How does merge sort work, and what is its space complexity?",
+    "What is a hash table, and how are collisions typically handled?",
+    "Can you explain the difference between BFS and DFS in graph traversal?",
+    "What is dynamic programming? Could you give a simple example?",
+    "Have you used the two-pointer technique before? Could you explain it with an example?",
     "What is the difference between a stack and a queue?",
     "How would you detect a cycle in a linked list?",
-    "Explain the concept of memoization.",
+    "Lastly, can you explain the concept of memoization?",
   ],
+
   hr: [
-    "Tell me about yourself.",
-    "What is your greatest technical strength?",
-    "Describe a challenging project and how you handled it.",
-    "Where do you see yourself in 5 years?",
-    "Why do you want to join this company?",
-    "Tell me about a time you worked in a team.",
-    "What do you do when you get stuck on a problem?",
-    "Describe a time you failed and what you learned.",
-    "How do you stay updated with new technology?",
-    "What makes you a good fit for this role?",
+    "Hello! It's great to meet you. Could you start by introducing yourself?",
+    "What would you say is your greatest technical strength?",
+    "Can you describe a challenging project you worked on and how you handled it?",
+    "Where do you see yourself in the next five years?",
+    "Why are you interested in joining our company?",
+    "Tell me about a time when you worked in a team to achieve a goal.",
+    "What do you usually do when you get stuck on a difficult problem?",
+    "Can you share an experience where you failed and what you learned from it?",
+    "How do you stay updated with new technologies and trends?",
+    "Finally, why do you think you would be a good fit for this role?",
   ],
+
   "full-loop": [
-    "Tell me about yourself.",
-    "Explain the difference between a process and a thread.",
-    "What are ACID properties in a database?",
-    "Explain time complexity of binary search.",
-    "What is dynamic programming? Give an example.",
-    "Design a URL shortening service like bit.ly.",
-    "How would you handle 1 million concurrent users?",
-    "Tell me about a challenging project you built.",
-    "How do you handle disagreements in a team?",
-    "Why do you want to join our company?",
+    "Hello! Welcome to the interview. Could you start by briefly introducing yourself?",
+    "Ok Sure, Let's begin with a core concept. What is the difference between a process and a thread?",
+    "Can you explain the ACID properties used in databases?",
+    "What is the time complexity of binary search?",
+    "Could you explain dynamic programming with a simple example?",
+    "Now a design question: how would you design a URL shortening service like Bitly?",
+    "How would you design a system that can handle one million concurrent users?",
+    "Can you tell me about a challenging project that you built?",
+    "How do you usually handle disagreements within a team?",
+    "To conclude, why would you like to work with our company?",
   ],
 };
 
@@ -55,11 +58,11 @@ const COMPANY_PERSONAS = {
   Google: { name: "SkillBridge AI", title: "Google Interview Simulator", initials: "AI", color: "from-blue-500 to-blue-700" },
   Microsoft: { name: "SkillBridge AI", title: "Microsoft Interview Simulator", initials: "AI", color: "from-indigo-500 to-indigo-700" },
   Amazon: { name: "SkillBridge AI", title: "Amazon Interview Simulator", initials: "AI", color: "from-amber-500 to-orange-600" },
-  Razorpay: { name: "SkillBridge AI", title: "Razorpay Interview Simulator", initials: "AI", color: "from-blue-600 to-cyan-600" },
-  Swiggy: { name: "SkillBridge AI", title: "Swiggy Interview Simulator", initials: "AI", color: "from-orange-500 to-red-500" },
-  Flipkart: { name: "SkillBridge AI", title: "Flipkart Interview Simulator", initials: "AI", color: "from-yellow-500 to-orange-500" },
-  Infosys: { name: "SkillBridge AI", title: "Infosys Interview Simulator", initials: "AI", color: "from-teal-500 to-teal-700" },
-  TCS: { name: "SkillBridge AI", title: "TCS Interview Simulator", initials: "AI", color: "from-purple-500 to-purple-700" },
+  Adobe: { name: "SkillBridge AI", title: "Adobe Interview Simulator", initials: "AI", color: "from-red-500 to-red-700" },
+  "Goldman Sachs": { name: "SkillBridge AI", title: "Goldman Sachs Interview Simulator", initials: "AI", color: "from-yellow-500 to-yellow-700" },
+  Oracle: { name: "SkillBridge AI", title: "Oracle Interview Simulator", initials: "AI", color: "from-red-600 to-pink-600" },
+  Paytm: { name: "SkillBridge AI", title: "Paytm Interview Simulator", initials: "AI", color: "from-cyan-500 to-blue-600" },
+  IBM: { name: "SkillBridge AI", title: "IBM Interview Simulator", initials: "AI", color: "from-gray-700 to-gray-900" },
 };
 
 export default function InterviewRoom({ config, onComplete }) {
@@ -488,7 +491,7 @@ export default function InterviewRoom({ config, onComplete }) {
 
       {/* Stop Modal */}
       {showStopModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
+     <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 px-4">
           <div className="bg-white rounded-3xl p-6 w-full max-w-sm shadow-2xl">
             <div className="w-12 h-12 rounded-2xl bg-red-50 flex items-center justify-center mx-auto mb-4">
               <svg className="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

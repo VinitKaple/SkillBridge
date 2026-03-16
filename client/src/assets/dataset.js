@@ -26,15 +26,15 @@ export const genderPlacementStats = {
 // ===============================
 
 export const averagePackageByCompany = [
-  { company: "Google", value: 42 },
-  { company: "Microsoft", value: 40 },
-  { company: "Amazon", value: 32 },
-  { company: "Adobe", value: 28 },
-  { company: "Goldman Sachs", value: 26 },
-  { company: "Oracle", value: 20 },
-  { company: "Paytm", value: 18 },
-  { company: "Freshworks", value: 15 },
-  { company: "Zoho", value: 12 },
+  { company: "Google", value: 22 },
+  { company: "Microsoft", value: 20 },
+  { company: "Amazon", value: 20 },
+  { company: "Adobe", value: 18 },
+  { company: "Goldman Sachs", value: 15 },
+  { company: "Oracle", value: 12 },
+  { company: "Paytm", value: 12 },
+  { company: "Freshworks", value: 11 },
+  { company: "Zoho", value: 10 },
   { company: "IBM", value: 10 },
 ];
 
