@@ -10,6 +10,7 @@ import ResumeBuilder from "./pages/ResumeBuilder";
 import SettingsPage from "./pages/SettingsPage";
 import Admin from "./pages/Admin";
 import MockInterview from "./pages/MockInterview";
+import CampusDrive from "./pages/CampusDrive";
 
 const App = () => {
   return (
@@ -24,6 +25,8 @@ const App = () => {
         <Route path="build" element={<ResumeBuilder />} />
 
         <Route path="settings" element={<SettingsPage />} />
+                <Route path="off" element={<CampusDrive />} />
+  
   
         <Route path="admin" element={<Admin />} />
         <Route path="prepare" element={<MockInterview />} />
