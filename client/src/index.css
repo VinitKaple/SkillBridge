@@ -21,5 +21,5 @@
 .animate-scroll {
   display: flex;
   width: max-content; /* important for continuous scroll */
-  animation: scroll 20s linear infinite; /* adjust speed as needed */
+  animation: scroll 30s linear infinite; /* adjust speed as needed */
 }
