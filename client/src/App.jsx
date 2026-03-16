@@ -11,30 +11,37 @@ import SettingsPage from "./pages/SettingsPage";
 import Admin from "./pages/Admin";
 import MockInterview from "./pages/MockInterview";
 import CampusDrive from "./pages/CampusDrive";
+import ChatBot from "./components/ChatBot";
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Landing />} />
+    <>
+      <Routes>
+        <Route path="/" element={<Landing />} />
 
-      <Route path="/dashboard" element={<DashboardLayout />}>
-        <Route index element={<DashboardPage />} />
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<DashboardPage />} />
 
-        <Route path="resume-engine" element={<ResumeAnalysis />} />
+          <Route path="resume-engine" element={<ResumeAnalysis />} />
 
-        <Route path="build" element={<ResumeBuilder />} />
+          <Route path="build" element={<ResumeBuilder />} />
 
-        <Route path="settings" element={<SettingsPage />} />
-                <Route path="off" element={<CampusDrive />} />
-  
-  
-        <Route path="admin" element={<Admin />} />
-        <Route path="prepare" element={<MockInterview />} />
+          <Route path="settings" element={<SettingsPage />} />
 
-        {/* Catches broken links INSIDE dashboard (e.g. /dashboard/test) */}
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
+          <Route path="off" element={<CampusDrive />} />
+
+          <Route path="admin" element={<Admin />} />
+
+          <Route path="prepare" element={<MockInterview />} />
+
+          {/* Broken dashboard routes */}
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+
+      {/* Chatbot visible globally */}
+      <ChatBot />
+    </>
   );
 };
 

@@ -8,6 +8,7 @@ import resumeRoutes from "./routes/resumeRoutes.js"
 import tnpdataRoutes from './routes/tnpdata.routes.js';
 import buildResume from "./routes/buildResume.js";   // ← ADD
 import interviewRoutes from "./routes/interviewRoutes.js";
+import chatRoutes from "./routes/chatRoutes.js";   // ← ADD THIS
 
 
 dotenv.config();
@@ -30,6 +31,7 @@ app.use("/api",resumeRoutes)
 app.use('/api/tnpdata', tnpdataRoutes);
 app.use("/api/resume", buildResume);    // ← ADD
 app.use("/api/interview", interviewRoutes);
+app.use("/api/chat", chatRoutes);   // ← ADD THIS
 
 // Register route
 
