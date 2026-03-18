@@ -13,6 +13,7 @@ import MockInterview from "./pages/MockInterview";
 import ConfidenceLens from "./components/confidence/ConfidenceLens";
 import ChatBot from "./components/ChatBot";
 
+
 const App = () => {
   return (
     <>
